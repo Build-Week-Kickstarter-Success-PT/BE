@@ -9,28 +9,11 @@ const { isValid } = require('../users/users-service.js');
 router.post('/register', async (req, res, next) => {
   const newUser = req.body;
 
-  const userExists = await Users.findBy({ username: newUser.username })
-
-    .then((found) => {
-      if (found) {
-        next({
-          apiCode: 400,
-          apiMessage: 'user already exists. please login!',
-        });
-
-        return;
-      }
-    })
-    .catch((err) => {
-      next({
-        apiCode: 500,
-        apiMessage: err.message,
-      });
-
-      return;
-    });
-
-  newUser.username ? userExists : null;
+  const userExist = await Users.findBy({ username: newUser.username }).first();
+  if (userExist) {
+    res.status(400).json({ message: 'user already exists, please log in!' });
+    return;
+  }
 
   try {
     if (isValid(newUser)) {
@@ -59,7 +42,7 @@ router.post('/login', async (req, res, next) => {
     if (!isValid(req.body)) {
       next({ apiCode: 400, apiMessage: 'username or password invalid' });
     } else {
-      const [user] = await Users.findBy({ username: username });
+      const user = await Users.findBy({ username }).first();
 
       if (user && bcryptjs.compareSync(password, user.password)) {
         const token = generateToken(user);
