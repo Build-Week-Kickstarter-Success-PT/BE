@@ -17,14 +17,12 @@ function find() {
   return db('users');
 }
 
-async function findBy(filter) {
-  const user = await db('users').where(filter).orderBy('id');
-  return user;
+function findBy(filter) {
+  return db('users').where(filter).orderBy('id');
 }
 
-async function findById(id) {
-  const user = await db('users').where({ id }).first();
-  return user;
+function findById(id) {
+  return db('users').where({ id }).first();
 }
 
 async function remove(id) {
