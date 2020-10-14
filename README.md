@@ -19,7 +19,7 @@ returns the new user that was created
 
 {
 id: 1,
-username: 'user'
+username: 'username'
 }
 
 POST Login
@@ -40,7 +40,7 @@ returns a message, user data and JSON web token, include { 'authorization': 'Bea
 message: "Welcome to the api",
 data: {
 id: 1,
-username: "test",
+username: "username",
 password: "$2a$10\$vwuAPuMM...Lqs80V8AVBFk53DhsOyl2"
 },
 token: "eyJhbGciOiJIUzI1NiIsIn...H1IBZbhw"
