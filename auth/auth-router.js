@@ -13,12 +13,20 @@ router.post('/register', async (req, res, next) => {
 
     .then((found) => {
       if (found) {
-        res.status(400).json({ message: 'user already exists. please login!' });
+        next({
+          apiCode: 400,
+          apiMessage: 'user already exists. please login!',
+        });
+
         return;
       }
     })
     .catch((err) => {
-      res.status(500).json({ message: err.message });
+      next({
+        apiCode: 500,
+        apiMessage: err.message,
+      });
+
       return;
     });
 
