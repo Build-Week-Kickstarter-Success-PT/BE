@@ -7,18 +7,41 @@ const Users = require('../users/users-model.js');
 const { isValid } = require('../users/users-service.js');
 
 router.post('/register', async (req, res, next) => {
-  const credentials = req.body;
+  const newUser = req.body;
+
+  const userExists = await Users.findBy({ username: newUser.username })
+
+    .then((found) => {
+      if (found) {
+        next({
+          apiCode: 400,
+          apiMessage: 'user already exists. please login!',
+        });
+
+        return;
+      }
+    })
+    .catch((err) => {
+      next({
+        apiCode: 500,
+        apiMessage: err.message,
+      });
+
+      return;
+    });
+
+  newUser.username ? userExists : null;
 
   try {
-    if (isValid(credentials)) {
+    if (isValid(newUser)) {
       const rounds = process.env.BCRYPT_ROUNDS
         ? parseInt(process.env.BCRYPT_ROUNDS)
         : 10;
 
-      const hash = bcryptjs.hashSync(credentials.password, rounds);
-      credentials.password = hash;
+      const hash = bcryptjs.hashSync(newUser.password, rounds);
+      newUser.password = hash;
 
-      const user = await Users.add(credentials);
+      const user = await Users.add(newUser);
       const token = generateToken(user);
       res.status(201).json({ data: user, token });
     } else {
