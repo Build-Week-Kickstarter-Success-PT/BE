@@ -40,7 +40,9 @@ router.post('/login', async (req, res, next) => {
 
       if (user && bcryptjs.compareSync(password, user.password)) {
         const token = generateToken(user);
-        res.status(200).json({ message: 'Welcome to the api', token: token });
+        res
+          .status(200)
+          .json({ message: 'Welcome to the api', data: user, token: token });
       } else {
         next({ apiCode: 401, apiMessage: 'invalid credentials' });
       }
@@ -64,7 +66,7 @@ function generateToken(user) {
 
   const token = jwt.sign(payload, secret, options);
 
-  token;
+  return token;
 }
 
 module.exports = router;
