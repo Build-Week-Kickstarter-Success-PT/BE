@@ -18,7 +18,7 @@ function find() {
 }
 
 async function findBy(filter) {
-  const user = await db('users').where(filter).first().orderBy('id');
+  const user = await db('users').where(filter).orderBy('id');
   return user;
 }
 
