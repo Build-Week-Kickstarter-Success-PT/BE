@@ -18,15 +18,13 @@ function find() {
 }
 
 function findBy(filter) {
-  return db('users').where(filter).orderBy('id');
+  return db('users').where(filter);
 }
 
 function findById(id) {
-  return db('users').where({ id }).first();
+  db('users').where({ id }).first();
 }
 
 async function remove(id) {
-  const userToDelete = await findById(id);
-  await db('users').where({ id }).del();
-  return userToDelete;
+  return db('users').where({ id }).del();
 }
