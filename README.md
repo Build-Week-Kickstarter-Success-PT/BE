@@ -1,47 +1,54 @@
-# API for Kickstarter Success app.
+## API for Kickstarter Success app.
 
-API
-https://kickstarter-success-api.herokuapp.com/
+[Kickstarter Success API](https://kickstarter-success-api.herokuapp.com/)
 
-POST Register A New User
-Endpoint /api/auth/register
+### POST Register
 
-Required in body:
-username
-password
+**Endpoint - /api/auth/register**
 
-{
-username: 'username',
-password: 'password'
-}
-
-returns the new user that was created
+```
+Required in body: username & password
 
 {
-id: 1,
-username: 'username'
+    username: 'username',
+    password: 'password'
 }
+```
 
-POST Login
-Endpoint /api/auth/login
-
-Required in body:
-username
-password
+```
+Returns the new user that was created
 
 {
-username: 'username',
-password: 'password'
+    id: 1,
+    username: 'username'
 }
+```
 
-returns a message, user data and JSON web token, include { 'authorization': 'Bearer <token>' } in request headers to access restricted endpoints
+### POST Login
+
+**Endpoint - /api/auth/login**
+
+```
+Required in body: username & password
 
 {
-message: "Welcome to the api",
-data: {
-id: 1,
-username: "username",
-password: "$2a$10\$vwuAPuMM...Lqs80V8AVBFk53DhsOyl2"
-},
-token: "eyJhbGciOiJIUzI1NiIsIn...H1IBZbhw"
+    username: 'username',
+    password: 'password'
 }
+```
+
+```
+Returns a message, user data and JSON web token.
+Include { 'authorization': 'Bearer <token>' } in request headers
+to access restricted endpoints
+
+{
+    message: "Welcome to the api",
+    data: {
+        id: 1,
+        username: "username",
+        password: "$2a$10\$vwuAPuMM...Lqs80V8AVBFk53DhsOyl2"
+    },
+    token: "eyJhbGciOiJIUzI1NiIsIn...H1IBZbhw"
+}
+```
