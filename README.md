@@ -52,7 +52,6 @@
             id: 1,
             name: 'name',
             email: 'username@email.com'
-            password: '$2a$10$i5x...39kZDV/UZRqhu'
         }
     ],
 }
@@ -102,7 +101,6 @@ If email or password is missing
         id: 1,
         name: 'name',
         email: 'user@email.com'
-        password: '$2a$10$i5x...39kZDV/UZRqhu'
     },
     token: 'eyJhbGciOi...jfEkQoOGJgTkg'
 }
