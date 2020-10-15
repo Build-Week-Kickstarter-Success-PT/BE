@@ -21,7 +21,7 @@
     campaign_name: string,
     goal: decimal,
     description: string,
-    campaign_date: dateTime,
+    campaign_date: date,
     category": string,
 }
 ```
