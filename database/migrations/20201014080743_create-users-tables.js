@@ -7,10 +7,11 @@ exports.up = function (knex) {
     })
     .createTable('campaigns', (tbl) => {
       tbl.increments();
-      tbl.integer('goal').unsigned().notNullable();
+      tbl.string('campaign_name', 256).notNullable();
+      tbl.decimal('goal').unsigned().notNullable();
       tbl.text('description').notNullable();
-      tbl.date('campaign-date').notNullable();
-      tbl.string('categories', 128).notNullable();
+      tbl.date('campaign_date').notNullable();
+      tbl.string('category', 128).notNullable();
       tbl
         .integer('user_id')
         .unsigned()

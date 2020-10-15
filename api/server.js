@@ -5,6 +5,7 @@ const errHandler = require('./errorHandler.js');
 
 const authRouter = require('../auth/auth-router.js');
 const usersRouter = require('../users/users-router.js');
+const campaignsRouter = require('../campaigns/campaigns-router.js');
 
 const server = express();
 
@@ -15,6 +16,7 @@ server.use(logger);
 
 server.use('/api/auth', authRouter);
 server.use('/api/users', usersRouter);
+server.use('/api/campaigns', campaignsRouter);
 
 server.get('/', (req, res) => {
   res.status(200).json({

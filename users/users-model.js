@@ -25,6 +25,6 @@ function findById(id) {
   db('users').where({ id }).first();
 }
 
-async function remove(id) {
+function remove(id) {
   return db('users').where({ id }).del();
 }
