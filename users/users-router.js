@@ -11,13 +11,13 @@ router.get('/', restricted, async (req, res, next) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', restricted, async (req, res) => {
   try {
     const { id } = req.params;
     const userToDelete = await Users.remove(id);
     res.status(200).json({ userToDelete, message: 'deleted' });
   } catch (err) {
-    res.status(500).json({ message: 'failed to delete store' });
+    next({ apiCode: 500, apiMessage: 'failed to delete user', ...err });
   }
 });
 
