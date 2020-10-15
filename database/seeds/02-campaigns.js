@@ -17,7 +17,7 @@ exports.seed = function (knex) {
       goal: 58719,
       description:
         'Finally redefining the concept of air purifiers thanks to a diffused purification and monitoring system - with powerful nanomaterials.',
-      campaign_date: '2020-11-31',
+      campaign_date: '2020-11-30',
       category: 'Design & Tech',
       user_id: 2,
     },
