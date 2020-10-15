@@ -15,23 +15,23 @@ router.post('/register', async (req, res, next) => {
     return;
   }
 
+  const rounds = process.env.BCRYPT_ROUNDS
+    ? parseInt(process.env.BCRYPT_ROUNDS)
+    : 10;
+
+  const hash = bcryptjs.hashSync(newUser.password, rounds);
+  newUser.password = hash;
+
   try {
     if (isValid(newUser)) {
-      const rounds = process.env.BCRYPT_ROUNDS
-        ? parseInt(process.env.BCRYPT_ROUNDS)
-        : 10;
-
-      const hash = bcryptjs.hashSync(newUser.password, rounds);
-      newUser.password = hash;
-
       const user = await Users.add(newUser);
       const token = generateToken(user);
       res.status(201).json({ data: user, token });
     } else {
       next({ apiCode: 400, apiMessage: 'username or password missing' });
     }
-  } catch (err) {
-    next({ apiCode: 500, apiMessage: 'error saving new user', ...err });
+  } catch (error) {
+    next({ apiCode: 500, apiMessage: 'error saving new user', ...error });
   }
 });
 
