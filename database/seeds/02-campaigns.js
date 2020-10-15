@@ -7,7 +7,7 @@ exports.seed = function (knex) {
       goal: 5000,
       description:
         'A motion control kit that lets you add tons of movements to your design, camera and light, instantly.',
-      campaign_date: 429496795,
+      campaign_date: 2020 - 10 - 15,
       category: 'Design & Tech',
       user_id: 1,
     },
@@ -17,7 +17,7 @@ exports.seed = function (knex) {
       goal: 58719,
       description:
         'Finally redefining the concept of air purifiers thanks to a diffused purification and monitoring system - with powerful nanomaterials.',
-      campaign_date: 429496725,
+      campaign_date: 2020 - 10 - 30,
       category: 'Design & Tech',
       user_id: 2,
     },
