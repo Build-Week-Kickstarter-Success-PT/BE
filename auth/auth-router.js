@@ -26,7 +26,9 @@ router.post('/register', async (req, res, next) => {
     if (isValid(newUser)) {
       const user = await Users.add(newUser);
       const token = generateToken(user);
-      res.status(201).json({ data: user });
+      res
+        .status(201)
+        .json({ data: { id: user.id, name: user.name, email: user.email } });
     } else {
       next({
         apiCode: 400,
@@ -49,9 +51,11 @@ router.post('/login', async (req, res, next) => {
 
       if (user && bcryptjs.compareSync(password, user.password)) {
         const token = generateToken(user);
-        res
-          .status(200)
-          .json({ message: 'Welcome to the api', data: user, token: token });
+        res.status(200).json({
+          message: 'Welcome to the api',
+          data: { id: user.id, name: user.name, email: user.email },
+          token: token,
+        });
       } else {
         next({ apiCode: 401, apiMessage: 'invalid credentials' });
       }
