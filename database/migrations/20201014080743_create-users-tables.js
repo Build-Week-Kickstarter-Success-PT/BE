@@ -2,7 +2,8 @@ exports.up = function (knex) {
   return knex.schema
     .createTable('users', (tbl) => {
       tbl.increments();
-      tbl.string('username', 128).notNullable().unique().index();
+      tbl.string('name', 256).notNullable().unique();
+      tbl.string('email', 256).notNullable().index();
       tbl.string('password', 256).notNullable();
     })
     .createTable('campaigns', (tbl) => {

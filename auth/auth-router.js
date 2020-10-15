@@ -9,7 +9,7 @@ const { isValid } = require('../users/users-service.js');
 router.post('/register', async (req, res, next) => {
   const newUser = req.body;
 
-  const userExist = await Users.findBy({ username: newUser.username }).first();
+  const userExist = await Users.findBy({ email: newUser.email }).first();
   if (userExist) {
     res.status(400).json({ message: 'user already exists, please log in!' });
     return;
@@ -26,9 +26,12 @@ router.post('/register', async (req, res, next) => {
     if (isValid(newUser)) {
       const user = await Users.add(newUser);
       const token = generateToken(user);
-      res.status(201).json({ data: user, token });
+      res.status(201).json({ data: user });
     } else {
-      next({ apiCode: 400, apiMessage: 'username or password missing' });
+      next({
+        apiCode: 400,
+        apiMessage: 'name, email or password missing',
+      });
     }
   } catch (error) {
     next({ apiCode: 500, apiMessage: 'error saving new user', ...error });
@@ -36,13 +39,13 @@ router.post('/register', async (req, res, next) => {
 });
 
 router.post('/login', async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     if (!isValid(req.body)) {
-      next({ apiCode: 400, apiMessage: 'username or password invalid' });
+      next({ apiCode: 400, apiMessage: 'email or password invalid' });
     } else {
-      const user = await Users.findBy({ username }).first();
+      const user = await Users.findBy({ email }).first();
 
       if (user && bcryptjs.compareSync(password, user.password)) {
         const token = generateToken(user);
@@ -61,7 +64,7 @@ router.post('/login', async (req, res, next) => {
 function generateToken(user) {
   const payload = {
     subject: user.id,
-    username: user.username,
+    email: user.email,
   };
 
   const secret = process.env.JWT_SECRET;
