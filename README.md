@@ -9,7 +9,7 @@
     id: integer,
     name: string,
     email: string
-    password: string,
+    password: string
 }
 ```
 
@@ -23,7 +23,7 @@
         goal: decimal,
         description: string,
         campaign_length: integer,
-        category: string,
+        category: string
     }
 ]
 ```
@@ -158,7 +158,7 @@ If email or password is missing
     goal: 10000,
     description: Sample description,
     campaign_length: 20,
-    category: Sample Category,
+    category: Sample Category
 }
 ```
 
@@ -186,7 +186,7 @@ If email or password is missing
 ```
 {
     apiCode: 400,
-    apiMessage:  'missing campaign fields',
+    apiMessage:  'missing campaign fields'
 }
 ```
 
