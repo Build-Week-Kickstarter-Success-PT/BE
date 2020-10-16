@@ -5,7 +5,6 @@ const errHandler = require('./errorHandler.js');
 
 const authRouter = require('../auth/auth-router.js');
 const usersRouter = require('../users/users-router.js');
-const campaignsRouter = require('../campaigns/campaigns-router.js');
 
 const server = express();
 
