@@ -1,15 +1,14 @@
+const router = require('express').Router();
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
-const router = require('express').Router();
 
 const Users = require('../users/users-model.js');
 const { isValid } = require('../users/users-service.js');
 
 router.post('/register', async (req, res, next) => {
-  const newUser = req.body;
+  const user = req.body;
 
-  const userExist = await Users.findBy({ email: newUser.email }).first();
+  const userExist = await Users.findBy({ email: user.email }).first();
   if (userExist) {
     res.status(400).json({ message: 'user already exists, please log in!' });
     return;
@@ -19,16 +18,19 @@ router.post('/register', async (req, res, next) => {
     ? parseInt(process.env.BCRYPT_ROUNDS)
     : 10;
 
-  const hash = bcryptjs.hashSync(newUser.password, rounds);
-  newUser.password = hash;
+  const hash = bcryptjs.hashSync(user.password, rounds);
+  user.password = hash;
 
   try {
-    if (isValid(newUser)) {
-      const user = await Users.add(newUser);
-      const token = generateToken(user);
-      res
-        .status(201)
-        .json({ data: { id: user.id, name: user.name, email: user.email } });
+    if (isValid(user)) {
+      const newUser = await Users.add(user);
+      res.status(201).json({
+        auth: {
+          id: newUser.id,
+          name: newUser.name,
+          email: newUser.email,
+        },
+      });
     } else {
       next({
         apiCode: 400,
@@ -53,7 +55,7 @@ router.post('/login', async (req, res, next) => {
         const token = generateToken(user);
         res.status(200).json({
           message: 'Welcome to the api',
-          data: { id: user.id, name: user.name, email: user.email },
+          auth: { id: user.id, name: user.name, email: user.email },
           token: token,
         });
       } else {
