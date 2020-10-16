@@ -4,14 +4,13 @@ module.exports = {
   add,
   find,
   findById,
-  findByUserId,
   update,
   remove,
 };
 
 async function add(campaign) {
   const [id] = await db('campaigns').insert(campaign, 'id');
-  return db('campaigns').where({ id });
+  return db('campaigns').where({ id }).first();
 }
 
 function find() {
@@ -21,31 +20,16 @@ function find() {
 function findById(id) {
   return db('campaigns')
     .join('users', 'campaigns.user_id', '=', 'users.id')
-    .where({ 'campaigns.id': id })
+    .where('campaigns.user_id', id)
     .select(
       'campaigns.id as campaign_id',
       'campaign_name',
       'goal',
       'description',
-      'campaign_date',
-      'category'
-    )
-    .first();
-}
-
-function findByUserId(userId) {
-  return db('campaigns')
-    .join('users', 'campaigns.user_id', '=', 'user.id')
-    .where({ 'campaigns.id': userId })
-    .select(
-      'campaigns.id as campaign_id',
-      'campaign_name',
-      'goal',
-      'description',
-      'campaign_date',
-      'category'
-    )
-    .first();
+      'campaign_length',
+      'category',
+      'user_id'
+    );
 }
 
 function update(changes, id) {

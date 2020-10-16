@@ -11,7 +11,7 @@ exports.up = function (knex) {
       tbl.string('campaign_name', 256).notNullable();
       tbl.decimal('goal').unsigned().notNullable();
       tbl.text('description').notNullable();
-      tbl.date('campaign_date').notNullable();
+      tbl.integer('campaign_length').notNullable();
       tbl.string('category', 128).notNullable();
       tbl
         .integer('user_id')
