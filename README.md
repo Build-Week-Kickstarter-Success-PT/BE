@@ -129,7 +129,7 @@ If email or password is missing
 
 **Status 200 - Success**
 
-> Return an array campaigns if the user has any
+> Returns an array of campaigns
 
 ```
 [
@@ -144,17 +144,6 @@ If email or password is missing
 
     }
 ]
-```
-
-**Status 404 - Not Found**
-
-> If the user does not have any campaigns
-
-```
-{
-    apiCode: 404,
-    apiMessage: 'there are no campaigns, please add one',
-}
 ```
 
 #### POST
@@ -207,7 +196,7 @@ If email or password is missing
 
 **Status 200 - Success**
 
-> Return the updated campaign with given campaign_id
+> Returns the updated campaign with given campaign_id
 
 ```
 {
@@ -230,7 +219,7 @@ If email or password is missing
 
 **Status 200 - Success**
 
-> Deletes the campaign with the given campaign_id (If the user has more than one campaign it will delete the campaign with the given campaign_id and return an array of the remainder campaigns)
+> Deletes the campaign with the given campaign_id (If the user has more than one campaign it will delete the campaign with the given campaign_id and returns an array of the remainder campaigns)
 
 ```
 {
