@@ -27,14 +27,6 @@ router.delete('/:id', restricted, async (req, res, next) => {
 router.get('/:id/campaigns', restricted, async (req, res, next) => {
   const { id } = req.params;
   try {
-    const campaigns = await Campaigns.findById(id);
-    if (campaigns.length === 0) {
-      next({
-        apiCode: 404,
-        apiMessage: 'there are no campaigns, please add one',
-      });
-    }
-
     const campaignById = await Campaigns.findById(id);
 
     res.status(200).json(campaignById);
