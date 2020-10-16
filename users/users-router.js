@@ -30,7 +30,7 @@ router.get('/:id/campaigns', restricted, async (req, res, next) => {
     const campaigns = await Campaigns.findById(id);
     if (!campaigns) {
       next({
-        apiCode: 400,
+        apiCode: 404,
         apiMessage: 'there are no campaigns, please add one',
       });
     }
@@ -52,7 +52,7 @@ router.post('/:id/campaigns', restricted, async (req, res, next) => {
     const newCampaign = await Campaigns.add(campaign);
     res.status(201).json(newCampaign);
   } catch (err) {
-    next({ apiCode: 500, apiMessage: 'failed to post campaign' });
+    next({ apiCode: 400, apiMessage: 'missing campaign fields' });
   }
 });
 
@@ -69,7 +69,7 @@ router.put(
     try {
       if (campaign) {
         await Campaigns.update(changes, campaign_id);
-        const updatedCampaign = await Campaigns.findById(req.params.id);
+        const updatedCampaign = await Campaigns.findById(req.params.id).first();
 
         res.status(200).json({
           updatedCampaign,

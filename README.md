@@ -18,7 +18,7 @@
 ```
 [
     {
-        id: integer,
+        campaign_id: integer,
         campaign_name: string,
         goal: decimal,
         description: string,
@@ -28,7 +28,9 @@
 ]
 ```
 
-### POST Register
+### User Account
+
+#### POST Register
 
 **Endpoint - /api/auth/register**
 
@@ -78,7 +80,7 @@ If email or password is missing
 }
 ```
 
-### POST Login
+#### POST Login
 
 **Endpoint - /api/auth/login**
 
@@ -120,3 +122,116 @@ If email or password is missing
 ```
 
 ### Campaigns
+
+#### GET
+
+**Endpoint - /api/users/:id/campaigns - Restricted**
+
+**Status 200 - Success**
+
+> Return campaigns if the user has any
+
+```
+{
+    campaign_id: 1,
+    campaign_name: Sample Campaign Name,
+    goal: 10000,
+    description: Sample description,
+    campaign_length: 20,
+    category: Sample Category,
+    user_id: 1
+
+}
+```
+
+**Status 404 - Not Found**
+
+> If the user does not have any campaigns
+
+```
+{
+    apiCode: 404,
+    apiMessage: 'there are no campaigns, please add one',
+}
+```
+
+#### POST
+
+**Endpoint - /api/users/:id/campaigns - Restricted**
+
+> Required in body: campaign_name, goal, description, campaign_length and category
+
+```
+{
+    campaign_name: Sample Campaign Name,
+    goal: 10000,
+    description: Sample description,
+    campaign_length: 20,
+    category: Sample Category,
+}
+```
+
+**Status 200 - Success**
+
+> Return the new campaign that was created
+
+```
+{
+    campaign_id: 1,
+    campaign_name: Sample Campaign Name,
+    goal: 10000,
+    description: Sample description,
+    campaign_length: 20,
+    category: Sample Category,
+    user_id: 1
+
+}
+```
+
+**Status 400 - Bad Request**
+
+> If the user does not have any campaigns
+
+```
+{
+    apiCode: 400,
+    apiMessage:  'missing campaign fields',
+}
+```
+
+#### PUT
+
+**Endpoint - /api/users/:id/campaigns/:campaign_id - Restricted**
+
+**Status 200 - Success**
+
+> Return the updated campaign with given campaign_id
+
+```
+{
+    updatedCampaign: {
+        campaign_id: 1,
+        campaign_name: Sample Campaign Name,
+        goal: 10000,
+        description: Sample description,
+        campaign_length: 20,
+        category: Sample Category,
+        user_id: 1
+    },
+    message: 'campaign updated'
+}
+```
+
+#### DELETE
+
+**Endpoint - /api/users/:id/campaigns/:campaign_id - Restricted**
+
+**Status 200 - Success**
+
+> Deletes the campaign with the given campaign_id
+
+```
+{
+    message: 'campaign deleted'
+}
+```
