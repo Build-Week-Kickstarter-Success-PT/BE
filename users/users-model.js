@@ -10,7 +10,7 @@ module.exports = {
 
 async function add(user) {
   const [id] = await db('users').insert(user, 'id');
-  return db('users').where({ id });
+  return db('users').where({ id }).first();
 }
 
 function find() {

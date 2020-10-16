@@ -16,14 +16,16 @@
 ### Campaign Schema
 
 ```
-{
-    id: integer,
-    campaign_name: string,
-    goal: decimal,
-    description: string,
-    campaign_length: integer,
-    category: string,
-}
+[
+    {
+        id: integer,
+        campaign_name: string,
+        goal: decimal,
+        description: string,
+        campaign_length: integer,
+        category: string,
+    }
+]
 ```
 
 ### POST Register
@@ -47,13 +49,13 @@
 
 ```
 {
-    data: [
+    auth: {
         {
             id: 1,
             name: 'name',
             email: 'username@email.com'
         }
-    ],
+    }
 }
 ```
 
@@ -97,7 +99,7 @@ If email or password is missing
 ```
 {
     message: 'Welcome to the api',
-    data: {
+    auth: {
         id: 1,
         name: 'name',
         email: 'user@email.com'
@@ -116,3 +118,5 @@ If email or password is missing
     'apiMessage': "username or password invalid"
 }
 ```
+
+### Campaigns
