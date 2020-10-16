@@ -129,19 +129,21 @@ If email or password is missing
 
 **Status 200 - Success**
 
-> Return campaigns if the user has any
+> Return an array campaigns if the user has any
 
 ```
-{
-    campaign_id: 1,
-    campaign_name: Sample Campaign Name,
-    goal: 10000,
-    description: Sample description,
-    campaign_length: 20,
-    category: Sample Category,
-    user_id: 1
+[
+    {
+        campaign_id: 1,
+        campaign_name: Sample Campaign Name,
+        goal: 10000,
+        description: Sample description,
+        campaign_length: 20,
+        category: Sample Category,
+        user_id: 1
 
-}
+    }
+]
 ```
 
 **Status 404 - Not Found**
@@ -228,10 +230,11 @@ If email or password is missing
 
 **Status 200 - Success**
 
-> Deletes the campaign with the given campaign_id
+> Deletes the campaign with the given campaign_id (If the user has more than one campaign it will delete the campaign with the given campaign_id and return an array of the remainder campaigns)
 
 ```
 {
+    campaigns: []
     message: 'campaign deleted'
 }
 ```
