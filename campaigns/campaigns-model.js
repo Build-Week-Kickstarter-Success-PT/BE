@@ -27,7 +27,7 @@ function findById(id) {
       'campaign_name',
       'goal',
       'description',
-      'campaign_date',
+      'campaign_length',
       'category'
     )
     .first();
@@ -42,7 +42,7 @@ function findByUserId(userId) {
       'campaign_name',
       'goal',
       'description',
-      'campaign_date',
+      'campaign_length',
       'category'
     )
     .first();
