@@ -21,5 +21,15 @@ exports.seed = function (knex) {
       category: 'Design & Tech',
       user_id: 2,
     },
+    {
+      id: 3,
+      campaign_name: 'Eteria - Amazing Filterless Personal Air Purifier',
+      goal: 58719,
+      description:
+        'Finally redefining the concept of air purifiers thanks to a diffused purification and monitoring system - with powerful nanomaterials.',
+      campaign_length: '20',
+      category: 'Design & Tech',
+      user_id: 5,
+    },
   ]);
 };
