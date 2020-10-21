@@ -23,9 +23,23 @@
         goal: decimal,
         description: string,
         campaign_length: integer,
-        category: string
+        category: string,
+        sub_category: string,
+        country: string
     }
 ]
+```
+
+### Prediction Schema
+
+```
+{
+    goal: decimal,
+    campaign_length: integer,
+    category: string
+    sub_category: string,
+    country: string
+}
 ```
 
 ### User Account
@@ -140,6 +154,8 @@ If email or password is missing
         description: Sample description,
         campaign_length: 20,
         category: Sample Category,
+        sub_category: Sample Sub Category,
+        country: Sample Country,
         user_id: 1
 
     }
@@ -150,7 +166,7 @@ If email or password is missing
 
 **Endpoint - /api/users/:id/campaigns - Restricted**
 
-> Required in body: campaign_name, goal, description, campaign_length and category
+> Required in body: campaign_name, goal, description, campaign_length, category, sub category, and country
 
 ```
 {
@@ -159,6 +175,8 @@ If email or password is missing
     description: Sample description,
     campaign_length: 20,
     category: Sample Category
+    sub_category: Sample Sub Category,
+    country: Sample Country
 }
 ```
 
@@ -174,6 +192,8 @@ If email or password is missing
     description: Sample description,
     campaign_length: 20,
     category: Sample Category,
+    sub_category: Sample Sub Category,
+    country: Sample Country,
     user_id: 1
 
 }
@@ -207,6 +227,8 @@ If email or password is missing
         description: Sample description,
         campaign_length: 20,
         category: Sample Category,
+        sub_category: Sample Sub Category,
+        country: Sample Country,
         user_id: 1
     },
     message: 'campaign updated'
@@ -225,5 +247,31 @@ If email or password is missing
 {
     campaigns: []
     message: 'campaign deleted'
+}
+```
+
+### Predictions
+
+**Endpoint - /api/users/:id/campaigns/:campaign_id/prediction - Restricted**
+
+> Required in body: goal, campaign_length, category, sub category, and country
+
+```
+{
+    goal: 10000,
+    campaign_length: 20,
+    category: Sample Category
+    sub_category: Sample Sub Category,
+    country: Sample Country
+}
+```
+
+**Status 200 - Success**
+
+> Returns a prediction of either 0 or 1 to determine success
+
+```
+{
+    prediction: 0
 }
 ```
