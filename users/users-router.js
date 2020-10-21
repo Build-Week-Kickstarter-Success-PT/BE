@@ -129,8 +129,16 @@ router.post(
             'https://kickstarter-predictor-dspt7.herokuapp.com/predict',
             DSPredictionModel
           )
-          .then((res) => res)
-          .catch((err) => err);
+          .then((response) => {
+            res.status(200).json(response.data);
+          })
+          .catch((err) => {
+            next({
+              apiCode: 500,
+              apiMessage: 'error getting prediction',
+              ...err,
+            });
+          });
       }
     } catch (err) {
       next({ apiCode: 500, apiMessage: 'error getting prediction', ...err });

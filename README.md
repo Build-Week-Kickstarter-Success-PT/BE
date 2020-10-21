@@ -252,6 +252,8 @@ If email or password is missing
 
 ### Predictions
 
+#### POST
+
 **Endpoint - /api/users/:id/campaigns/:campaign_id/prediction - Restricted**
 
 > Required in body: goal, campaign_length, category, sub category, and country
