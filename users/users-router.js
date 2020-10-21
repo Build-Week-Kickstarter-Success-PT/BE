@@ -104,7 +104,8 @@ router.delete(
 // Predictions
 // users/:id/campaigns/:campaign_id/predictions
 router.post(
-  '/:id/campaigns/:campaign_id/predictions',
+  '/:id/campaigns/:campaign_id/prediction',
+  restricted,
   async (req, res, next) => {
     const { campaign_id } = req.params;
     const campaign = req.body;
