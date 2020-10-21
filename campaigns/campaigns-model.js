@@ -28,6 +28,8 @@ function findById(id) {
       'description',
       'campaign_length',
       'category',
+      'sub_category',
+      'country',
       'user_id'
     );
 }
