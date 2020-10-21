@@ -12,7 +12,9 @@ exports.up = function (knex) {
       tbl.decimal('goal').unsigned().notNullable();
       tbl.text('description').notNullable();
       tbl.integer('campaign_length').notNullable();
-      tbl.string('category', 128).notNullable();
+      tbl.string('category', 256).notNullable();
+      tbl.string('sub_category', 256).notNullable();
+      tbl.string('country', 256).notNullable();
       tbl
         .integer('user_id')
         .unsigned()
@@ -20,7 +22,7 @@ exports.up = function (knex) {
         .references('id')
         .inTable('users')
         .onUpdate('CASCADE')
-        .onDelete('RESTRICT');
+        .onDelete('CASCADE');
     });
 };
 

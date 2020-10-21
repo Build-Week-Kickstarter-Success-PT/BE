@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const axios = require('axios');
+
 const Users = require('../users/users-model.js');
 const Campaigns = require('../campaigns/campaigns-model.js');
 const restricted = require('../auth/restricted-middleware.js');
@@ -95,6 +97,42 @@ router.delete(
       }
     } catch (err) {
       next({ apiCode: 500, apiMessage: 'failed to delete campaigns', ...err });
+    }
+  }
+);
+
+// Predictions
+// users/:id/campaigns/:campaign_id/predictions
+router.post(
+  '/:id/campaigns/:campaign_id/predictions',
+  async (req, res, next) => {
+    const { campaign_id } = req.params;
+    const campaign = req.body;
+
+    const campaignById = Campaigns.findById(campaign_id);
+
+    const DSPredictionModel = {
+      x1: campaign.goal,
+      x2: campaign.campaign_length,
+      x3: campaign.country,
+      x4: campaign.category,
+      x5: campaign.sub_category,
+    };
+
+    console.log(DSPredictionModel);
+
+    try {
+      if (campaignById) {
+        await axios
+          .post(
+            'https://kickstarter-predictor-dspt7.herokuapp.com/predict',
+            DSPredictionModel
+          )
+          .then((res) => res)
+          .catch((err) => err);
+      }
+    } catch (err) {
+      next({ apiCode: 500, apiMessage: 'error getting prediction', ...err });
     }
   }
 );
