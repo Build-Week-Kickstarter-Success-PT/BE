@@ -118,6 +118,7 @@ router.post(
       x3: campaign.country,
       x4: campaign.category,
       x5: campaign.sub_category,
+      x6: campaign.description,
     };
 
     console.log(DSPredictionModel);
