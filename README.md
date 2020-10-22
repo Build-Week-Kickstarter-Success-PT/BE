@@ -174,7 +174,7 @@ If email or password is missing
     goal: 10000,
     description: Sample description,
     campaign_length: 20,
-    category: Sample Category
+    category: Sample Category,
     sub_category: Sample Sub Category,
     country: Sample Country
 }
