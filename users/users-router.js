@@ -64,7 +64,7 @@ router.put(
       if (campaign) {
         await Campaigns.update(changes, campaign_id);
         const updatedCampaign = await Campaigns.findById(req.params.id).first();
-        console.log(updatedCampaign);
+
         res.status(200).json({
           updatedCampaign,
           message: 'campaign updated',
