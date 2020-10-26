@@ -2,6 +2,10 @@
 
 [Kickstarter Success API](https://kickstarter-success-api.herokuapp.com/)
 
+### Postman Documentation
+
+https://documenter.getpostman.com/view/12571982/TVYF8eRy
+
 ### Users Schema
 
 ```
